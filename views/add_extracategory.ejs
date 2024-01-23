@@ -1,0 +1,40 @@
+<%-include('header')%>
+       <!-- Form Start -->
+       <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Add Extra-Category</h6>
+                    <form method="post" action="/admin/extraCategory/insertExtracategoryData">
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Category</label>
+                            <select name="category" id="catId" onchange="return getSubCategoryData()" class="col-sm-9 form-select" aria-label="Default select example">
+                                <option>- - Select Category - -</option>
+                                <%CatData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>"><%=v.category%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Sub Category</label>
+                            <select name="subcategory" id="subcatId" class="col-sm-9 form-select" aria-label="Default select example">
+                                <option>- - Select Subcategory - -</option>
+                                <%SubcatData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>"><%=v.subcategory%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Extra Category</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="extracategory" class="form-control" id="inputEmail3" placeholder="Enter Extra-Category">
+                            </div>
+                        </div>  
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form End -->
+<%-include('footer')%>

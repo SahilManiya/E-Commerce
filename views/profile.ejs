@@ -1,0 +1,102 @@
+<%-include('header')%>
+       <!-- Form Start -->
+       <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Admin Profile</h6>
+                    <div style="width: 100%;" class="d-flex justify-content-center align-items-center">
+                        <div style="border-radius: 10px; width: 430px; height: 600px; background: black" class="d-flex flex-column align-items-center justify-content-center">
+                            <div style="width: 100%; height: 200px;" class="mt-4 d-flex justify-content-center">
+                                <img src="<%=locals.user.adminImage%>"  style="height: 180px; width: 170px; border-radius: 10px;">
+                            </div>
+                            <div style="width: 80%;">
+                                <div class="d-flex align-items-center mt-2 mb-2" style="width: 100%;">
+                                    <div style="width: 30%;">
+                                        <h4 style="margin: 0; font-size: 18px;">Name</h4>
+                                    </div>
+                                    <div style="width: 10%;">
+                                        <span>:</span>
+                                    </div>
+                                    <div style="width: 60%;">
+                                        <span style="font-size: 17px;"><%=locals.user.name%></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2" style="width: 100%;">
+                                    <div style="width: 30%;">
+                                        <h4 style="margin: 0; font-size: 18px;">Email</h4>
+                                    </div>
+                                    <div style="width: 10%;">
+                                        <span>:</span>
+                                    </div>
+                                    <div style="width: 60%;">
+                                        <span style="font-size: 17px;"><%=locals.user.email%></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2 " style="width: 100%; ">
+                                    <div style="width: 30%;">
+                                        <h4 style="margin: 0; font-size: 18px;">Gender</h4>
+                                    </div>
+                                    <div style="width: 10%;">
+                                        <span>:</span>
+                                    </div>
+                                    <div style="width: 60%;">
+                                        <span style="font-size: 17px;"><%=locals.user.gender%></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2 " style="width: 100%; ">
+                                    <div style="width: 30%;">
+                                        <h4 style="margin: 0; font-size: 18px;">City</h4>
+                                    </div>
+                                    <div style="width: 10%;">
+                                        <span>:</span>
+                                    </div>
+                                    <div style="width: 60%;">
+                                        <span style="font-size: 17px;"><%=locals.user.city%></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2 " style="width: 100%; ">
+                                    <div style="width: 30%;">
+                                        <h4 style="margin: 0; font-size: 18px;">Gender</h4>
+                                    </div>
+                                    <div style="width: 10%;">
+                                        <span>:</span>
+                                    </div>
+                                    <div style="width: 60%;">
+                                        <span style="font-size: 17px;"><%=locals.user.gender%></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2 " style="width: 100%; ">
+                                    <div style="width: 30%;">
+                                        <h4 style="margin: 0; font-size: 18px;">Message</h4>
+                                    </div>
+                                    <div style="width: 10%;">
+                                        <span>:</span>
+                                    </div>
+                                    <div style="width: 60%;">
+                                        <span style="font-size: 17px;"><%=locals.user.description%></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-4 " style="width: 100%;">
+                                    <div style="width: 30%;">
+                                        <h4 style="margin: 0; font-size: 18px;">Hobby</h4>
+                                    </div>
+                                    <div style="width: 10%;">
+                                        <span>:</span>
+                                    </div>
+                                    <div style="width: 60%;">
+                                        <span style="font-size: 17px;"><%=locals.user.hobby%></span>
+                                    </div>
+                                </div>
+                                <div style="width: 100%;" class="d-flex align-items-center justify-content-center">
+                                    <a href="/admin/update_profile" class="btn btn-primary">Edit Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form End -->
+<%-include('footer')%>

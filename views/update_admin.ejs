@@ -1,0 +1,100 @@
+<%-include('header')%>
+       <!-- Form Start -->
+       <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Update Admin Form</h6>
+                    <form method="post" action="/admin/editAdminData" enctype="multipart/form-data">
+                        <input type="hidden" name="EditId" value="<%=AdminData.id%>">
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">First Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="fname" value="<%=splitName[0]%>" class="form-control" id="inputEmail3" placeholder="Enter First Name">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Last Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="lname" value="<%=splitName[1]%>" class="form-control" id="inputEmail3" placeholder="Enter Last Name">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="email" value="<%=AdminData.email%>" class="form-control" id="inputEmail3" placeholder="Enter Email">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Image</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="adminImage" class="form-control" id="inputPassword3">
+                                <img src="<%=AdminData.adminImage%>" style="height: 100px; width: 80px;">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea type="text" name="description" class="form-control" id="inputPassword3" placeholder="Enter Description"><%=AdminData.description%></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">City</label>
+                            <%var city = ["Ahemdabad","Surat","Bhavanagar","Delhi","Mumbai","Rajkot"]%>
+                            <select name="city" class="col-sm-10 form-select" aria-label="Default select example">
+                                <option>- - Select City - -</option>
+                                <%for(var v of city){%>
+                                    <option value="<%=v%>"<%if(AdminData.city==v){%><%='selected'%><%}%>><%=v%></option>
+                                <%}%>
+                            </select>
+                        </div>
+                        <fieldset class="row mb-3">
+                            <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="Male" name="gender" 
+                                        id="gridRadios1" value="option1" <%if(AdminData.gender=='Male'){%><%='checked'%><%}%> >
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="Female" name="gender"
+                                        id="gridRadios2" value="option2" <%if(AdminData.gender=='Female'){%><%='checked'%><%}%> >
+                                    <label class="form-check-label" for="gridRadios2">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row mb-3">
+                            <legend class="col-form-label col-sm-2 pt-0">Hobby</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck1" value="Reading" name="hobby" <%if(AdminData.hobby.includes('Reading')){%><%='checked'%><%}%>>
+                                    <label class="form-check-label" for="gridCheck1">
+                                        Reading
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck1" value="Writing" name="hobby" <%if(AdminData.hobby.includes('Writing')){%><%='checked'%><%}%>>
+                                    <label class="form-check-label" for="gridCheck1">
+                                        Writing
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck1" value="Learning" name="hobby" <%if(AdminData.hobby.includes('Learning')){%><%='checked'%><%}%>>
+                                    <label class="form-check-label" for="gridCheck1">
+                                        Learning
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form End -->
+<%-include('footer')%>

@@ -1,0 +1,209 @@
+<%-include('header')%>
+     <!-- Table Start -->
+     <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <div class="mb-2">
+                        <h5 class="mb-2">View Product</h5>
+                        <a href="/admin/product/view_product" style="width: 80px;" class="btn btn-primary d-flex align-items-center justify-content-center"><i class="ri-arrow-left-fill me-1"></i>Back</a>
+                    </div>
+                    <div class="row">
+                        <div style="width: 500px;">
+                            <div style="width: 100%;">
+                                <div class="carousel slide carousel-fade" style="width: 350px !important;" data-bs-ride="carousel" id="abc">
+                                    <div class="carousel-inner">
+                                        <% data.multi_image.forEach((image, index) => { %>
+                                            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                                <img src="<%= image %>" style="height: 450px; width: 350px; left: 20%;">
+                                            </div>
+                                        <% }) %>
+                                        <button style="height: 100px !important; top: 38%;" type="button" class="carousel-control-prev" data-bs-target="#abc" data-bs-toggle="carousel" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon"></span>
+                                        </button>
+                                        <button style="height: 100px !important; top: 38%;" type="button" class="carousel-control-next" data-bs-target="#abc" data-bs-toggle="carousel" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="width: 350px; height: 100px; display: flex; margin-top: 10px;">
+                                    <%data.multi_image.forEach((v1,i1)=>{%>
+                                        <div style=" width: 100%; height: 100%; display: flex; justify-content: center !important; align-items: center !important;  position: relative;" class="multi_image">
+                                            <img src="<%=data.multi_image[i1]%>" style="height: 100%; width: 90%;">
+                                            <button title="Delete" class="me-1 singleimgdelete singleimgdu" onclick="return deleteimg('<%=data.id%>','<%=i1%>','<%=data.multi_image[i1] %>')">
+                                                <i class="ri-close-fill"></i>
+                                            </button>
+                                            <a href="/admin/product/editimg?id=<%=data.id%>&i1=<%=i1%>&img=<%=data.multi_image[i1] %>" title="Update" class="me-1 singleimgupdate singleimgdu" onclick="return deleteimg('<%=data.id%>','<%=i1%>','<%=data.multi_image[i1] %>')">
+                                                <i class="ri-pencil-fill"></i>
+                                            </a>
+                                        </div>
+                                    <%})%>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 400px;" class="pro-details">
+                            <div style="width: 100%;">
+                                <div>
+                                    <h5>Product Details</h5>
+                               </div>
+                               <div class="product-details">
+                                    <div class="d-flex align-items-center mt-3">
+                                        <div style="width: 150px;">
+                                            <h6>Product Name</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.product%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>MRP</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><s style="letter-spacing: 1px;">₹<%=data.mrp%></s></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Special Discount</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span style="letter-spacing: 1px; background-color: green; color: white; padding: 2px 5px; border-radius: 3px;"><%=data.discount%>%</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Product Price</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span style="letter-spacing: 1px; color: red;">₹<%=data.price%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Category</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.category.category%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Sub Category</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.subcategory.subcategory%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Extra Category</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.extracategory.extracategory%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Brand</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.brand.brand%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Type</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.type.type%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Description</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.description%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Available Colors</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.color%></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div style="width: 150px;">
+                                            <h6>Size</h6>
+                                        </div>
+                                        <div style="width: 20px;">
+                                            <span>:</span>
+                                        </div>
+                                        <div style="width: 250px;">
+                                            <span><%=data.size%></span>
+                                        </div>
+                                    </div>
+                                    <div style="margin: 20px 0;">
+                                        <%if(data.isActive){%>
+                                            <a href="/admin/product/isactive/<%=data.id%>" title="Active" class="me-1 moreproduct-btn btn">
+                                                <i class="ri-eye-line"></i>
+                                            </a>
+                                        <%}else{%>
+                                            <a href="/admin/product/deactive/<%=data.id%>" title="Deactive" class="me-1 moreproduct-btn btn">
+                                                <i class="ri-eye-off-line"></i>
+                                            </a>
+                                        <%}%>
+                                        <a href="/admin/product/update/<%=data.id%>" title="Update" class="me-1 moreproduct-btn btn">
+                                            <i class="ri-pencil-fill"></i>
+                                        </a>
+                                        <a href="/admin/product/delete/<%=data.id%>" title="Delete" class="me-1 moreproduct-btn btn">
+                                            <i class="ri-close-fill"></i>
+                                        </a>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table End -->
+
+<%-include('footer')%>

@@ -1,0 +1,284 @@
+<%-include('header')%>
+       <!-- Form Start -->
+       <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-10">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Add Product</h6>
+                    <form method="post" action="/admin/product/insertProductData" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Category</label>
+                            <select name="category" id="catId" onchange="return getSubCategoryData()" class="col-sm-9 form-select" aria-label="Default select example">
+                                <option>- - Select Category - -</option>
+                                <%CatData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>"><%=v.category%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Sub Category</label>
+                            
+                                <select name="subcategory" id="subcatId" onchange="return getExCategoryData()" class="col-sm-9 form-select" aria-label="Default select example">
+                                    <option>- - Select Subcategory - -</option>
+                                    <%SubcatData.map((v,i)=>{%>
+                                        <option value="<%=v.id%>"><%=v.subcategory%></option>
+                                    <%})%>
+                                </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Extra Category</label>
+                            <select name="extracategory" id="excatId" onchange="return getBrandData()" class="col-sm-9 form-select" aria-label="Default select example">
+                                <option>- - Select Extra-Category - -</option>
+                                <%ExcatData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>"><%=v.extracategory%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Brand</label>
+                            <select name="brand" id="brandId" onchange="return getTypeData()" class="col-sm-9 form-select" aria-label="Default select example">
+                                <option>- - Select Brand - -</option>
+                                <%BrandData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>"><%=v.brand%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Type</label>
+                            <select name="type" id="typeId" class="col-sm-9 form-select" aria-label="Default select example">
+                                <option>- - Select Type - -</option>
+                                <%TypeData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>"><%=v.type%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Product Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="product" class="form-control" id="inputEmail3" placeholder="Enter Product">
+                            </div>
+                        </div>  
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Discount (%)</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="discount" class="form-control" id="inputEmail3" placeholder="Enter Discount">
+                            </div>
+                        </div>  
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">MRP</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="mrp" class="form-control" id="inputEmail3" placeholder="Enter MRP">
+                            </div>
+                        </div>  
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Product Price</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="price" class="form-control" id="inputEmail3" placeholder="Enter Product Price">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea type="text" name="description" class="form-control" id="inputPassword3" placeholder="Enter Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <legend class="col-form-label col-sm-3 pt-0">Product Color</legend>
+                            <div class="col-sm-9">
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Blue" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Blue
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Black" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Black
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="White" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            White
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Red" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Red
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Aqua" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Aqua
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Green" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Green
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Gold" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Gold
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Silver" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Silver
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Cream" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Cream
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Yellow" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Yellow
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Pink" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Pink
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Orange" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Orange
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Purple" name="color">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Purple
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="row mb-3">
+                            <legend class="col-form-label col-sm-3 pt-0">Product Size</legend>
+                            <div class="col-sm-9">
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="M" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            M
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="L" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            L
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="SM" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            SM
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="XL" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            XL
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="XXL" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            XXL
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="10inches" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            10 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="15inches" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            15 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="20inches" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            20 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="22inches" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            22 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="25inches" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            25 inches
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="1_8Meter" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            1.8 Meter
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="2_8Meter" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            2.8 Meter
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="3_0Meter" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            3.0 Meter
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="3_8Meter" name="size">
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            3.8 Meter
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Product Image</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="single_image" class="form-control" id="inputPassword3">
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Product Multi Image</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="multi_image" multiple class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form End -->
+<%-include('footer')%>

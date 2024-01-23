@@ -1,0 +1,26 @@
+<%-include('header')%>
+       <!-- Form Start -->
+       <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-10">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Update Image</h6>
+                    <form method="post" action="/admin/product/insert_img" enctype="multipart/form-data">
+                        <input type="text" name="id" value="<%=id%>" hidden >
+                        <input type="text" name="i"  value="<%=i%>" hidden>
+                        <input type="text" name="img" value="<%=img%>" hidden>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Product Image</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="multi_image" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form End -->
+<%-include('footer')%>

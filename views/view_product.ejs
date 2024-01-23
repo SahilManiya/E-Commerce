@@ -1,0 +1,211 @@
+<%-include('header')%>
+     <!-- Table Start -->
+     <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">View Product</h6>
+                    <form class="d-flex">
+                        <input value="<%=searchInput%>" style="width: 20% !important; margin-right: 5px;" name="search" class="form-control bg-dark border-0" type="text" placeholder="Search">
+                        <input type="submit" class="btn btn-primary" value="Search">
+                    </form>
+                    <div class="col-12">
+                        <div class="row ">
+                            <%if(ProductData!=""){%>
+                            <%for(var v of ProductData){%>
+                                <div class="col-xxl-3 col-xl-6">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="box d-flex align-items-center justify-content-center flex-column">
+                                            <div style="width: 100%;" class="d-flex align-items-center justify-content-center">
+                                                <img src="<%=v.single_image%>" class="product-img">
+                                            </div>
+                                            <div class="product-content mt-3" style="width: 85%;">
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <div class="col-4">
+                                                        <div class="d-flex justify-content-center">
+                                                            <h6 class="d-flex align-items-center justify-content-center" style="margin: 0;">Product Name : </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="d-flex justify-content-start">
+                                                            <span class="d-flex align-items-center justify-content-center ms-2"><%=v.product%></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <div class="col-4">
+                                                        <div class="d-flex justify-content-center">
+                                                            <h6 class="d-flex align-items-center justify-content-center" style="margin: 0;">Product Price : </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="d-flex justify-content-start">
+                                                            <span class="d-flex align-items-center justify-content-center ms-2" style="color: #EB1616;">₹<%=v.price%></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <div class="col-4">
+                                                        <div class="d-flex justify-content-center">
+                                                            <h6 class="d-flex align-items-center justify-content-center" style="margin: 0;">Available Color : </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="d-flex justify-content-start">
+                                                            <span class="d-flex align-items-center justify-content-center ms-2"><%=v.color%></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center justify-content-center mt-2 more-details">
+                                                    <a href="/admin/product/view_more/<%=v.id%>" class="btn btn-primary">
+                                                        <span>More Details</span>
+                                                    </a>
+                                                </div>
+                                                <div class="product-btn d-flex align-items-center justify-content-center mt-2 me-1">
+                                                    <%if(v.isActive){%>
+                                                        <a href="/admin/product/isactive/<%=v.id%>" title="Active" class="me-1 productbutton btn">
+                                                            <i class="ri-eye-line"></i>
+                                                        </a>
+                                                    <%}else{%>
+                                                        <a href="/admin/product/deactive/<%=v.id%>" title="Deactive" class="me-1 productbutton btn">
+                                                            <i class="ri-eye-off-line"></i>
+                                                        </a>
+                                                    <%}%>
+                                                    <a href="/admin/product/update/<%=v.id%>" title="Update" class="me-1 productbutton btn">
+                                                        <i class="ri-pencil-fill"></i>
+                                                    </a>
+                                                    <a href="/admin/product/delete/<%=v.id%>" title="Delete" class="me-1 productbutton btn">
+                                                        <i class="ri-close-fill"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <%}}else{%>
+                                <table class="table">
+                                    <tr>
+                                        <td colspan="20" align="center">No Record Found</td>
+                                    </tr>
+                                </table>
+                            <%}%>
+                            <table style="width: 100%;">
+                                <tr align="center">
+                                    <td>
+                                        <%for(var i=0; i<totalDocument; i=i+1){%>
+                                            <a href="?page=<%=i%>&searchInput=<%=searchInput%>" class="dubtn btn"><%=i+1%></a>
+                                        <%}%>
+                                    </td>
+                                </tr>
+                                <tr align="center" >
+                                    <td>
+                                        <%var pre = parseInt(curentPage)-1%>
+                                        <%if(pre>=0){%>
+                                            <a href="?page=<%=pre%>" class="btn btn-primary">Pre</a>
+                                        <%}%>
+                                        <a href="?page=<%=page%>&searchInput=<%=searchInput%>" class="dubtn btn"><%=parseInt(page)+1%></a>
+                                        <%var nextpage = parseInt(curentPage)+1%>
+                                        <% if(totalDocument>nextpage){%>
+                                            <a href="?page=<%=nextpage%>" class="btn btn-primary">Next</a>
+                                        <%}%>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr align="center">
+                                    <th scope="col">No.</th>
+                                    <th scope="col">CATEGORY</th>
+                                    <th scope="col">SUB CATEGORY</th>
+                                    <th scope="col">EXTRA CATEGORY</th>
+                                    <th scope="col">BRAND</th>
+                                    <th scope="col">TYPE</th>
+                                    <th scope="col">PRODUCT</th>
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col">COLOR</th>
+                                    <th scope="col">PRODUCT SIZE</th>
+                                    <th scope="col">IMAGE</th>
+                                    <th scope="col">MULTI IMAGES</th>
+                                    <th scope="col">STATUS</th>
+                                    <th scope="col">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%if(ProductData!=""){%>
+                                <%i=0%>
+                                <%for(var v of ProductData){%>
+                                    <tr align="center">
+                                        <th scope="row"><%=i=i+1%></th>
+                                        <td><%=v.category.category%></td>
+                                        <td><%=v.subcategory.subcategory%></td>
+                                        <td><%=v.extracategory.extracategory%></td>
+                                        <td><%=v.brand.brand%></td>
+                                        <td><%=v.type.type%></td>
+                                        <td><%=v.product%></td>
+                                        <td><%=v.price%></td>
+                                        <td><%=v.color%></td>
+                                        <td><%=v.size%></td>
+                                        <td>
+                                            <img src="<%=v.single_image%>" style="height: 50px; width: 50px;">
+                                        </td>
+                                        <td>
+                                            <%v.multi_image.forEach((v1,i1)=>{%>
+                                                <img src="<%=v.multi_image[i1]%>"style="height: 50px; width: 50px;">
+                                            <%})%>
+                                        </td>
+                                        <td>
+                                            <%if(v.isActive){%>
+                                                <a href="/admin/product/isactive/<%=v.id%>" class="btn btn-success">Active</a>
+                                            <%}else{%>
+                                                <a href="/admin/product/deactive/<%=v.id%>" class="btn btn-danger">Deactive</a>
+                                            <%}%>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/product/delete/<%=v.id%>" title="Delete" class="dubtn btn">
+                                                <i class="ri-close-fill"></i>
+                                            </a>
+                                            <a href="/admin/product/update/<%=v.id%>" title="Update" class="dubtn btn">
+                                                <i class="ri-pencil-fill"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <%}}else{%>
+                                    <tr>
+                                        <td colspan="20" align="center">No Record Found</td>
+                                    </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                        <table style="width: 100%;">
+                            <tr align="center">
+                                <td>
+                                    <%for(var i=0; i<totalDocument; i=i+1){%>
+                                        <a href="?page=<%=i%>&searchInput=<%=searchInput%>" class="dubtn btn"><%=i+1%></a>
+                                    <%}%>
+                                </td>
+                            </tr>
+                            <tr align="center" >
+                                <td>
+                                    <%var pre = parseInt(curentPage)-1%>
+                                    <%if(pre>=0){%>
+                                        <a href="?page=<%=pre%>" class="btn btn-primary">Pre</a>
+                                    <%}%>
+                                    <a href="?page=<%=page%>&searchInput=<%=searchInput%>" class="dubtn btn"><%=parseInt(page)+1%></a>
+                                    <%var nextpage = parseInt(curentPage)+1%>
+                                    <% if(totalDocument>nextpage){%>
+                                        <a href="?page=<%=nextpage%>" class="btn btn-primary">Next</a>
+                                    <%}%>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table End -->
+
+<%-include('footer')%>

@@ -1,0 +1,288 @@
+<%-include('header')%>
+       <!-- Form Start -->
+       <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-10">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Update Product</h6>
+                    <form method="post" action="/admin/product/editProductData" enctype="multipart/form-data">
+                        <input type="hidden" name="EditId" value="<%=ProductData.id%>">
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Category</label>
+                            <select name="category" id="catId" class="col-sm-9 form-select" onchange="return getSubCategoryData()" aria-label="Default select example">
+                                <option>- - Select Category - -</option>
+                                <%CatData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>" <%if(v.id==ProductData.category){%> <%='selected'%> <%}%>><%=v.category%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Sub Category</label>
+                            <select name="subcategory" id="subcatId" class="col-sm-9 form-select" onchange="return getExCategoryData()" aria-label="Default select example">
+                                <option>- - Select Sub-Category - -</option>
+                                <%SubcatData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>" <%if(v.id==ProductData.subcategory){%> <%='selected'%> <%}%>><%=v.subcategory%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Extra Category</label>
+                            <select name="extracategory" id="excatId" class="col-sm-9 form-select" onchange="return getBrandData()" aria-label="Default select example">
+                                <option>- - Select Extra-Category - -</option>
+                                <%ExcatData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>" <%if(v.id==ProductData.extracategory){%> <%='selected'%> <%}%>><%=v.extracategory%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Brand</label>
+                            <select name="brand" id="brandId" class="col-sm-9 form-select" onchange="return getTypeData()" aria-label="Default select example">
+                                <option>- - Select Brand - -</option>
+                                <%BrData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>" <%if(v.id==ProductData.brand){%> <%='selected'%> <%}%>><%=v.brand%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Type</label>
+                            <select name="type" id="typeId" class="col-sm-9 form-select" aria-label="Default select example">
+                                <option>- - Select Type - -</option>
+                                <%TyData.map((v,i)=>{%>
+                                    <option value="<%=v.id%>" <%if(v.id==ProductData.type){%> <%='selected'%> <%}%>><%=v.type%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Product Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="product" value="<%=ProductData.product%>" class="form-control" id="inputEmail3" placeholder="Enter Product">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Discount</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="discount" value="<%=ProductData.discount%>" class="form-control" id="inputEmail3" placeholder="Enter Discount">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">MRP</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="mrp" value="<%=ProductData.mrp%>" class="form-control" id="inputEmail3" placeholder="Enter MRP">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Product Price</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="price" value="<%=ProductData.price%>" class="form-control" id="inputEmail3" placeholder="Enter Price">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea type="text" name="description" class="form-control" id="inputPassword3" placeholder="Enter Description"><%=ProductData.description%></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <legend class="col-form-label col-sm-3 pt-0">Product Color</legend>
+                            <div class="col-sm-9">
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Blue" name="color" <% if(ProductData.color.includes('Blue')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Blue
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Black" name="color" <% if(ProductData.color.includes('Black')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Black
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Purple" name="color" <% if(ProductData.color.includes('White')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            White
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Red" name="color" <% if(ProductData.color.includes('Red')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Red
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Aqua" name="color" <% if(ProductData.color.includes('Aqua')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Aqua
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Green" name="color" <% if(ProductData.color.includes('Green')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Green
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Gold" name="color" <% if(ProductData.color.includes('Gold')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Gold
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Silver" name="color" <% if(ProductData.color.includes('Silver')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Silver
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Cream" name="color" <% if(ProductData.color.includes('Cream')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Cream
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Yellow" name="color" <% if(ProductData.color.includes('Yellow')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Yellow
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Pink" name="color" <% if(ProductData.color.includes('Pink')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Pink
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Orange" name="color" <% if(ProductData.color.includes('Orange')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Orange
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="Purple" name="color" <% if(ProductData.color.includes('Purple')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            Purple
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="row mb-3">
+                            <legend class="col-form-label col-sm-3 pt-0">Product Size</legend>
+                            <div class="col-sm-9">
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="M" name="size" <% if(ProductData.size.includes('M')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            M
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="L" name="size" <% if(ProductData.size.includes('M')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            L
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="SM" name="size" <% if(ProductData.size.includes('SM')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            SM
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="XL" name="size" <% if(ProductData.size.includes('XL')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            XL
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="XXL" name="size" <% if(ProductData.size.includes('XXL')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            XXL
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="10inches" name="size" <% if(ProductData.size.includes('10inches')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            10 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="15inches" name="size" <% if(ProductData.size.includes('15inches')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            15 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="20inches" name="size" <% if(ProductData.size.includes('20inches')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            20 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="22inches" name="size" <% if(ProductData.size.includes('22inches')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            22 inches
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="25inches" name="size" <% if(ProductData.size.includes('25inches')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            25 inches
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="1_8Meter" name="size" <% if(ProductData.size.includes('1_8Meter')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            1.8 Meter
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="2_8Meter" name="size" <% if(ProductData.size.includes('2_8Meter')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            2.8 Meter
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="3_0Meter" name="size" <% if(ProductData.size.includes('3_0Meter')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            3.0 Meter
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" value="3_8Meter" name="size" <% if(ProductData.size.includes('3_8Meter')) { %> checked <% } %>>
+                                        <label class="form-check-label me-4" for="gridCheck1">
+                                            3.8 Meter
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Product Image</label>
+                            <div class="col-sm-9">
+                                <img src="<%=ProductData.single_image%>" style="height: 100px; width: 80px;">
+                                <input type="file" name="single_image" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Product Multi Image</label>
+                            <div class="col-sm-9">
+                                <%ProductData.multi_image.forEach((v1,i1)=>{%>
+                                    <img src="<%=ProductData.multi_image[i1]%>"style="height: 100px; width: 80px;">
+                                <%})%>
+                                <input type="file" multiple name="multi_image" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form End -->
+<%-include('footer')%>
