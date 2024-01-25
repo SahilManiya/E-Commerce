@@ -100,10 +100,9 @@
                                 <h6 class="error-message">please select size</h6>
                                 <div class="size-box">
                                     <ul>
-                                        <li><a href="javascript:void(0)">s</a></li>
-                                        <li><a href="javascript:void(0)">m</a></li>
-                                        <li><a href="javascript:void(0)">l</a></li>
-                                        <li><a href="javascript:void(0)">xl</a></li>
+                                        <%for(var s of ProDetails.size){%>
+                                            <li style="border-radius: 0; border: none;"><a href="javascript:void(0)" style="font-size: medium;"><%=s%></a></li>
+                                        <%}%>
                                     </ul>
                                 </div>
                                 <h6 class="product-title">quantity</h6>

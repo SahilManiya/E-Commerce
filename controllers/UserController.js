@@ -46,6 +46,7 @@ module.exports.Product_Page = async(req,res)=>{
         let ExcatData = await Extracategory.find({});
         let ProData = await Product.find({});
         let ProDetails = await Product.findById(req.params.id);
+        console.log(ProDetails);
         return res.render('user_panel/Product_Page',{
             CatData : CatData,
             SubcatData : SubcatData,
