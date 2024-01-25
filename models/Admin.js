@@ -4,49 +4,41 @@ const imagePath = '/uploads/Admin';
 const multer = require('multer');
 
 const AdminSchema = mongoose.Schema({
+    google : {
+        type : String
+    },
     name : {
-        type : String,
-        required : true
+        type : String
     },
     email : {
-        type : String,
-        required : true
+        type : String
     },
     password : {
-        type : String,
-        required : true
+        type : String
     },
     city : {
-        type : String,
-        required : true
+        type : String
     },
     gender : {
-        type : String,
-        required : true
+        type : String
     },
     description : {
-        type : String,
-        required : true
+        type : String
     },
     adminImage : {
-        type : String,
-        required : true
+        type : String
     },
     hobby : {
-        type : Array,
-        required : true
+        type : Array
     },
     isActive : {
-        type : Boolean,
-        required : true
+        type : Boolean
     },
     currentdate : {
-        type : String,
-        required : true
+        type : String
     },
     updatedate : {
-        type : String,
-        required : true
+        type : String
     }
 })
 

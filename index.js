@@ -8,6 +8,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const cookieParser = require('cookie-parser');
+const GoogleStrategy = require('./config/googlestrategy');
 
 app.use(express.urlencoded());
 
@@ -32,6 +33,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthentic);
+
 
 app.use('/',require('./router/user'));
 app.use('/admin',require('./router/admin'));

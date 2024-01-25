@@ -65,4 +65,14 @@ routes.use('/type',passport.cheAuth,require('../router/type'));
 
 routes.use('/product',passport.cheAuth,require('../router/product'));
 
+routes.get('/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+  routes.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/dashboard');
+});
+
 module.exports = routes;
