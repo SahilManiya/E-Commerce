@@ -39,6 +39,9 @@ const AdminSchema = mongoose.Schema({
     },
     updatedate : {
         type : String
+    },
+    role :{
+        type : String,
     }
 })
 
