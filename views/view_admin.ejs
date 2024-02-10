@@ -33,11 +33,33 @@
                                         <th scope="row"><%=i=i+1%></th>
                                         <td><%=v.name%></td>
                                         <td><%=v.email%></td>
-                                        <td><%=v.city%></td>
-                                        <td><%=v.gender%></td>
-                                        <td><%=v.hobby%></td>
-                                        <td><%=v.description%></td>
-                                        <td><img src="<%=v.adminImage%>" style="width: 80px; height: 100px;"></td>
+                                        <%if(v.city){%>
+                                            <td><%=v.city%></td>
+                                        <%}else if(v.city=='- - Select City - -'){%>
+                                            <td style="color: red;">not define</td>
+                                        <%}else{%>
+                                            <td style="color: red;">not define</td>
+                                        <%}%>
+                                        <%if(v.gender){%>
+                                            <td><%=v.gender%></td>
+                                        <%}else{%>
+                                            <td style="color: red;">not define</td>
+                                        <%}%>
+                                        <%if(v.hobby==''){%>
+                                            <td style="color: red;">not define</td>
+                                        <%}else{%>
+                                                <td><%=v.hobby%></td>
+                                        <%}%>
+                                        <%if(v.description){%>
+                                            <td><%=v.description%></td>
+                                        <%}else{%>
+                                            <td style="color: red;">not define</td>
+                                        <%}%>
+                                        <%if(!v.adminImage){%>
+                                            <td><img src="/img/user1.jpg" style="width: 80px; height: 100px;"></td>
+                                        <%}else{%>
+                                            <td><img src="<%=v.adminImage%>" style="width: 80px; height: 100px;"></td>
+                                        <%}%>
                                         <td>
                                             <%if(v.isActive){%>
                                                 <a href="/admin/isactive/<%=v.id%>" class="btn btn-success">Active</a>

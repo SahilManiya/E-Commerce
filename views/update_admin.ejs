@@ -29,7 +29,11 @@
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Image</label>
                             <div class="col-sm-10">
                                 <input type="file" name="adminImage" class="form-control" id="inputPassword3">
-                                <img src="<%=AdminData.adminImage%>" style="height: 100px; width: 80px;">
+                                <%if(!AdminData.adminImage){%>
+                                    <img src="/img/user1.jpg" style="height: 100px; width: 80px;">
+                                <%}else{%>
+                                    <img src="<%=AdminData.adminImage%>" style="height: 100px; width: 80px;">
+                                <%}%>
                             </div>
                         </div>
                         <div class="row mb-3">

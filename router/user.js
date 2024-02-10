@@ -20,4 +20,6 @@ routes.get('/cart/:productid/:userid',UserController.addtoCart);
 
 routes.get('/removeProduct/:id',UserController.removeProduct);
 
+routes.get('/view_cart/:id',passport.checkUserAthuntication,UserController.view_cart);
+ 
 module.exports = routes;

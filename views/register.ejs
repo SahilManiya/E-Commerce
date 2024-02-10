@@ -43,44 +43,60 @@
         <!-- Spinner End -->
 
 
-        <!-- Sign In Start -->
+        <!-- Sign Up Start -->
         <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
-                        <form action="/admin/loginCheck" method="post">
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <a href="index.html" class="">
-                                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
-                                </a>
-                                <h3>Sign In</h3>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <a href="index.html" class="">
+                                <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+                            </a>
+                            <h3>Sign Up</h3>
+                        </div>
+                        <form action="/admin/registerData" method="post">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="fname" id="floatingText" placeholder="First Name">
+                                <label for="floatingText">First Name</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <input type="text" class="form-control" name="lname" id="floatingText" placeholder="Last Name">
+                                <label for="floatingText">Last Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
                                 <label for="floatingInput">Email address</label>
                             </div>
-                            <div class="form-floating mb-4">
-                                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <legend class="col-form-label pt-0">Gender</legend>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="Male" name="gender" id="gridRadios1" value="option1">
+                                    <label class="form-check-label" for="gridRadios1">Male</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="Female" name="gender" id="gridRadios2" value="option2">
+                                    <label class="form-check-label" for="gridRadios2">Female</label>
+                                </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                 </div>
-                                <a href="/admin/checkMail">Forgot Password</a>
                             </div>
-                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
                         </form>
-                        <a href="/admin/google" type="submit" class="btn btn-primary py-3 w-100 mb-4 d-flex justify-content-center align-items-center">Login With Google</a>
-                        <p class="text-center mb-0">Don't have an Account? <a href="/admin/register">Sign Up</a></p>
+                        <p class="text-center mb-0">Already have an Account? <a href="/admin">Sign In</a></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Sign In End -->
+        <!-- Sign Up End -->
     </div>
-
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

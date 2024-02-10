@@ -47,8 +47,16 @@ routes.get('/changepassword',passport.cheAuth,AdminController.changepassword);
 
 routes.post('/editPassword',passport.cheAuth,AdminController.editPassword);
 
-// routes.post('/mailCheck',)
-
+routes.get('/register',async(req,res)=>{
+    try {
+        return res.render('register');
+    } 
+    catch (error) {
+        console.log(error);
+        return res.redirect('back');    
+    }
+})
+routes.post('/registerData',AdminController.registerData);
 routes.get('/logout',async(req,res)=>{
     return res.redirect('/admin/');
 })

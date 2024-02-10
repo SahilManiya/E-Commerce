@@ -34,6 +34,7 @@ module.exports.categoryData = async(req,res)=>{
         let SubcatData = await Subcategory.find({});
         let ExcatData = await Extracategory.find({});
         let productData = await Product.find({category:req.params.cid,subcategory:req.params.sid,extracategory:req.params.eid});
+        let ProDetails = await Product.find(req.params.id);
         if(req.user){
             var cartData = await Cart.find({userId : req.user.id, status : 'pending'}).countDocuments();
             var cartPendingData = await Cart.find({ userId: req.user.id, status: 'pending' }).populate('productId').exec();
@@ -43,6 +44,7 @@ module.exports.categoryData = async(req,res)=>{
             SubcatData : SubcatData,
             ExcatData : ExcatData,
             ProData : productData,
+            ProDetails : ProDetails, 
             cartdata : cartData,
             cartpendingData : cartPendingData
         })
@@ -75,7 +77,7 @@ module.exports.Product_Page = async(req,res)=>{
             cartpendingData : cartPendingData 
         });
     } 
-    catch (error) {
+    catch (error) { 
         console.log(error);
         return res.redirect('back');    
     }
@@ -146,7 +148,7 @@ module.exports.register = async(req,res)=>{
 module.exports.login = async(req,res)=>{
     try{
         console.log("Login Successfully");
-        return res.redirect('back');
+        return res.redirect('/');
     }
     catch (error) {
         console.log(error);
@@ -200,5 +202,39 @@ module.exports.removeProduct = async(req,res)=>{
     catch (error) {
         console.log(error);
         return res.redirect('back');    
+    }
+}
+
+module.exports.view_cart = async(req,res)=>{
+    try {
+        let CatData = await Category.find({});
+        let SubcatData = await Subcategory.find({});
+        let ExcatData = await Extracategory.find({});
+        let ProData = await Product.find({});
+        let ProDetails = await Product.findById(req.params.id);
+        let findCart  = await Cart.find({userId : req.params.id}).populate('productId').exec();
+        // console.log(findCart.productId);
+        // console.log(findCart);
+        // console.log(ProData);
+        if(req.user){ 
+            var cartData = await Cart.find({userId : req.user.id, status : 'pending'}).countDocuments();
+            var cartPendingData = await Cart.find({ userId: req.user.id, status: 'pending' }).populate('productId').exec();
+        }
+        if(findCart){
+            return res.render('user_panel/view_cart',{
+                CatData : CatData,
+                SubcatData : SubcatData,
+                ExcatData : ExcatData,
+                ProData : ProData,
+                ProDetails : ProDetails,
+                cartdata : cartData,
+                cartpendingData : cartPendingData,
+                view_cart : findCart
+            });
+        }
+    } 
+    catch (error) {
+        console.log(error);
+        return res.redirect('back');        
     }
 }

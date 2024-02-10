@@ -34,6 +34,22 @@ module.exports.insertAdminData = async(req,res)=>{
     }
 }
 
+module.exports.registerData = async(req,res)=>{
+    try {
+        req.body.name = req.body.fname+' '+req.body.lname;
+        req.body.isActive = true;
+        req.body.currentdate = new Date().toLocaleString();
+        req.body.updatedate = new Date().toLocaleString();
+        req.body.role = "admin";
+        await Admin.create(req.body);
+        return res.redirect('/admin');
+    } 
+    catch (error) {
+        console.log(error);
+        return res.redirect('back');    
+    }
+}
+
 module.exports.dashboard = async(req,res)=>{
     return res.render('dashboard');
 }
@@ -180,6 +196,9 @@ module.exports.editAdminData = async(req,res)=>{
                 let adminImagePath = await Admin.imageModel+'/'+req.file.filename;
                 req.body.adminImage = adminImagePath;
                 req.body.name = req.body.fname+' '+req.body.lname;
+                if(req.body.city=='- - Select City - -'){
+                    req.body.city = '';
+                }
                 let updateData = await Admin.findByIdAndUpdate(req.body.EditId,req.body);
                 if(updateData){
                     console.log("Record And Image Update Successfully");
@@ -193,6 +212,9 @@ module.exports.editAdminData = async(req,res)=>{
         }
         else{
             req.body.name = req.body.fname+' '+req.body.lname;
+            if(req.body.city=='- - Select City - -'){
+                req.body.city = '';
+            }
             let updateData = await Admin.findByIdAndUpdate(req.body.EditId,req.body);
             if(updateData){
                 console.log("Record Update Successfully");
