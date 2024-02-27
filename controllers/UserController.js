@@ -4,6 +4,7 @@ const Extracategory = require('../models/Extracategory');
 const Product = require('../models/Product');
 const Cart = require('../models/Cart');
 const User = require('../models/User');
+const GoogleStrategy = require('../config/googlestrategy');
 
 module.exports.user_home = async(req,res)=>{
     try {

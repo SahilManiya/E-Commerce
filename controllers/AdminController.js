@@ -2,7 +2,7 @@ const Admin = require('../models/Admin');
 const path = require('path');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
-
+const bcrypt = require('bcrypt');
 module.exports.add_admin = async(req,res)=>{
     return res.render('add_admin');
 }
@@ -75,7 +75,6 @@ module.exports.view_admin = async(req,res)=>{
         })
         .limit(perPage)
         .skip(perPage*page);
-        
         let totalAdminData = await Admin.find({
             $or : [
                 {"name" : {$regex:".*"+search+".*",$options:"i"}},
@@ -236,6 +235,17 @@ module.exports.loginCheck = async(req,res)=>{
     return res.redirect('/admin/dashboard');
 }
 
+module.exports.logout = async(req,res)=>{
+    try {
+        res.clearCookie('RNW');
+        return res.redirect('/admin/');
+    } 
+    catch (error) {
+        console.log(error);
+        return res.redirect('back'); 
+    }
+}
+
 module.exports.checkMail = async(req,res)=>{
     try {
         return res.render('ForgotPassword/checkMail');
@@ -248,7 +258,6 @@ module.exports.checkMail = async(req,res)=>{
 
 module.exports.mailCheck = async(req,res)=>{
     try {
-        console.log(req.body);
         let chekemaildata = await Admin.findOne({ email: req.body.email });
         if (chekemaildata) {
             const transporter = nodemailer.createTransport({
@@ -261,9 +270,10 @@ module.exports.mailCheck = async(req,res)=>{
                     pass: "ajmkqqnndvxjwmos",
                 },
             });
-
             var otp = Math.floor(100000+Math.random()*900000);
-            res.cookie('otp',otp);
+            var stringotp = otp.toString();
+            var bcryptotp = await bcrypt.hash(stringotp,10);
+            res.cookie('otp',bcryptotp);
             res.cookie('email',chekemaildata.email);
             const info = await transporter.sendMail({
                 from: 'sahilmaniya76@gmail.com', // sender address
@@ -271,11 +281,11 @@ module.exports.mailCheck = async(req,res)=>{
                 subject: "Hello ✔", // Subject line
                 text: "Hello its your otp", // plain text body
                 html: `<h3>OTP = ${otp}</h3>`, // html body
-              });
-              if(info){
+            });
+            if(info){
                 console.log("OTP Send");
-                return res.redirect('/admin//send_otp');
-              }
+                return res.redirect('/admin/send_otp');
+            }
         }
         else {
             console.log("email not match");
@@ -373,7 +383,7 @@ module.exports.editPassword = async(req,res) =>{
 
 module.exports.verify_otp = async(req,res)=>{
     try {
-        if(req.body.otp == req.cookies.otp){
+        if(await bcrypt.compare(req.body.otp,req.cookies.otp)){
             return res.render('ForgotPassword/new_password');
         }
         else{

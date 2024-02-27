@@ -57,9 +57,7 @@ routes.get('/register',async(req,res)=>{
     }
 })
 routes.post('/registerData',AdminController.registerData);
-routes.get('/logout',async(req,res)=>{
-    return res.redirect('/admin/');
-})
+routes.get('/logout',passport.cheAuth,AdminController.logout);
 
 routes.use('/category',passport.cheAuth,require('../router/category'));
 
@@ -72,15 +70,5 @@ routes.use('/brand',passport.cheAuth,require('../router/brand'));
 routes.use('/type',passport.cheAuth,require('../router/type'));
 
 routes.use('/product',passport.cheAuth,require('../router/product'));
-
-routes.get('/google',
-  passport.authenticate('google', { scope: ['profile'] }));
-
-  routes.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/dashboard');
-});
 
 module.exports = routes;

@@ -1,14 +1,36 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const User = require('../models/User');
 
 passport.use(new GoogleStrategy({
-    clientID: '299093683043-fro66h1so01ud91er2hn6eb05ovo9tnm.apps.googleusercontent.com',
-    clientSecret: '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',
-    callbackURL: "https://localhost:8007/admin/google/callback"
+    clientID: '796522805764-0g1s6apcn9ha59qal8vh537g8pn5kntp.apps.googleusercontent.com',
+    clientSecret: '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',
+    callbackURL: "http://localhost:8007/google/callback"
 },
-function(accessToken, refreshToken, profile, cb) {
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    console.log(profile);
-  }
-))
+async function(accessToken, refreshToken, profile, done) {
+  console.log(profile);
+    let checkMail = await User.findOne({email:profile.emails[0].value});
+    if(checkMail){
+        done(null,checkMail);
+    }
+    else{
+        var pass = 123;
+        let userDetails = {
+            name : profile.displayName,
+            email : profile.emails[0].value,
+            isActive : true,
+            password : pass,
+            currentDate : new Date().toLocaleString() ,
+            updateDate : new Date().toLocaleString(),
+            role : 'user'
+        }
+        let insertUser = await User.create(userDetails);
+        if(insertUser){
+            return done(null,insertUser);
+        }
+        else{
+            return done(null,false); 
+        }
+    }
+}))
+module.exports = GoogleStrategy;

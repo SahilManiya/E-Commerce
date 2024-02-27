@@ -21,5 +21,14 @@ routes.get('/cart/:productid/:userid',UserController.addtoCart);
 routes.get('/removeProduct/:id',UserController.removeProduct);
 
 routes.get('/view_cart/:id',passport.checkUserAthuntication,UserController.view_cart);
+
+routes.get('/google',
+  passport.authenticate('google', { scope: ['profile','email']}));
+
+  routes.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/' }),
+  function(req, res) {
+    return res.redirect('/');
+  });
  
 module.exports = routes;

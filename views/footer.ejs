@@ -42,7 +42,7 @@
     function getSubCategoryData(){
         var catId = document.getElementById('catId').value;
         $.ajax({
-            url : "/admin/extraCategory/getSubcatData",
+            url : "/admin/extraCategory/getSubcatData", 
             method : "post",
             data : {
                 cateGoryId : catId

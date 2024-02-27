@@ -316,7 +316,7 @@
                                                                     <ul>
                                                                         <% for(var ed of ExcatData){
                                                                             if(sd.id == ed.subcategory){%>
-                                                                        <li><a href="#"><%=ed.extracategory%></a></li>
+                                                                        <li><a href="/categoryData/<%=ed.category%>/<%=ed.subcategory%>/<%=ed.id%>"><%=ed.extracategory%></a></li>
                                                                         <%} }%>
                                                                     </ul>
                                                                 </div>
