@@ -261,13 +261,13 @@ module.exports.mailCheck = async(req,res)=>{
         let chekemaildata = await Admin.findOne({ email: req.body.email });
         if (chekemaildata) {
             const transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                port: 465,
+                host: process.env.SMPT_HOST,
+                port: process.env.SMPT_PORT,
                 secure: true,
                 auth: {
                     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-                    user: "sahilmaniya76@gmail.com",
-                    pass: "ajmkqqnndvxjwmos",
+                    user: process.env.SMPT_MAIL,
+                    pass: process.env.SMPT_PASSWORD,
                 },
             });
             var otp = Math.floor(100000+Math.random()*900000);
@@ -276,7 +276,7 @@ module.exports.mailCheck = async(req,res)=>{
             res.cookie('otp',bcryptotp);
             res.cookie('email',chekemaildata.email);
             const info = await transporter.sendMail({
-                from: 'sahilmaniya76@gmail.com', // sender address
+                from: process.env.SMPT_MAIL, // sender address
                 to: chekemaildata.email, // list of receivers
                 subject: "Hello ✔", // Subject line
                 text: "Hello its your otp", // plain text body
